@@ -1,6 +1,7 @@
 package com.blog.Blog.security;
 
 import com.blog.Blog.service.implementation.CustomUserDetailsService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
@@ -9,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -45,11 +45,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try{
                 username=this.jwtTokenHelper.getUsernameFromToken(token);
             }catch (IllegalArgumentException e){
-                System.out.println("unable to get jwt token");
+                throw new IllegalArgumentException();
             }catch (ExpiredJwtException e){
-                System.out.println("jwt token has expired");
+                throw new RuntimeException("token has expired");
             }catch (MalformedJwtException e){
-                System.out.println("invalid jwt");
+                throw new MalformedJwtException("invalid jwt");
             }
         }else {
             System.out.println("request Token is null or request Token is not start with Bearer");

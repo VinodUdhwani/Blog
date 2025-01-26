@@ -1,6 +1,8 @@
 package com.blog.Blog.payLoads;
 
+import com.blog.Blog.entity.Role;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
@@ -11,27 +13,30 @@ import java.util.Set;
 public class UserDto {
 
     private int id;
+
     @NotEmpty
-    @Size(min = 4)
+    @Size(min = 4,message = "name must be contain minimum 4 character")
     private String name;
-    @Email(message = "kindly provide valid email address")
+
+    @Email
     private String email;
+
+    //    @Pattern(regexp = "")
     @NotEmpty
-    @Length(min = 8,message = "password must be contain minimum 8 character")
-//    @Pattern(regexp = "")
+    @Size(min = 4,message = "password must be contain minimum 4 character")
     private String password;
+
     @NotEmpty
     private String about;
 
-    private Set<RoleDto> rolesDto=new HashSet<>();
+    private Set<Role> roles=new HashSet<>();
 
-    public UserDto(String about, String email, int id, String name, String password, Set<RoleDto> rolesDto) {
+    public UserDto(String about, String email, int id, String name, String password) {
         this.about = about;
         this.email = email;
         this.id = id;
         this.name = name;
         this.password = password;
-        this.rolesDto = rolesDto;
     }
 
     public UserDto(){
@@ -78,11 +83,11 @@ public class UserDto {
         this.about = about;
     }
 
-    public Set<RoleDto> getRolesDto() {
-        return rolesDto;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRolesDto(Set<RoleDto> rolesDto) {
-        this.rolesDto = rolesDto;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

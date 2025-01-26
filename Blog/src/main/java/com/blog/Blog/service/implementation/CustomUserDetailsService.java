@@ -1,7 +1,7 @@
 package com.blog.Blog.service.implementation;
 
 import com.blog.Blog.entity.User;
-import com.blog.Blog.exceptions.ResourceNotFoundException;
+import com.blog.Blog.exceptions.InvalidUsername;
 import com.blog.Blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.userRepository.findByEmail(username).orElseThrow(()->new ResourceNotFoundException("User","email: "+username,0));
+        User user = this.userRepository.findByEmail(username).orElseThrow(()->new InvalidUsername("invalid username!"));
         return user;
     }
 }

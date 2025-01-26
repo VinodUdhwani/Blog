@@ -3,6 +3,7 @@ package com.blog.Blog.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,7 @@ public class Role {
     private String name;
 
     @ManyToMany
-    private Set<User> users;
+    private Set<User> users= new HashSet<>();
 
     public Role(int id, String name, Set<User> user) {
         this.id = id;
