@@ -7,6 +7,7 @@ import com.blog.Blog.security.JwtTokenHelper;
 import com.blog.Blog.service.UserService;
 import com.blog.Blog.service.implementation.CustomUserDetailsService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,14 +33,17 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @PostMapping("/login")
     public ResponseEntity<JwtAuthResponse> createToken( @RequestBody JwtAuthRequest jwtAuthRequest){
 
         this.authenticate(jwtAuthRequest.getUsername(),jwtAuthRequest.getPassword());
         UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtAuthRequest.getUsername());
         String generatedToken = this.jwtTokenHelper.generateToken(userDetails);
-
-        return new ResponseEntity<>(new JwtAuthResponse(generatedToken,(UserDto) userDetails), HttpStatus.OK);
+        UserDto userDto = this.userService.getUserByEmail(userDetails.getUsername());
+        return new ResponseEntity<>(new JwtAuthResponse(generatedToken,userDto), HttpStatus.OK);
     }
 
     private void authenticate(String username, String password) {
@@ -47,7 +51,7 @@ public class AuthController {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=new UsernamePasswordAuthenticationToken(username,password);
             authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         }catch (BadCredentialsException e){
-            throw new BadCredentialsException("invalid username or password !");
+            throw new BadCredentialsException("invalid password !");
         }
     }
 

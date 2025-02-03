@@ -19,7 +19,7 @@ public class CommentController {
     @PostMapping("/user/{userId}/post/{postId}")
     public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto, @PathVariable Integer userId,@PathVariable Integer postId){
         CommentDto createdComment=commentService.createComment(commentDto,userId,postId);
-        return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdComment, HttpStatus.OK);
     }
 
     @DeleteMapping("/{commentId}")
@@ -31,12 +31,12 @@ public class CommentController {
     @GetMapping("/{commentId}")
     public ResponseEntity<CommentDto> getComment(@PathVariable Integer commentId){
         CommentDto commentDto = commentService.getCommentById(commentId);
-        return new ResponseEntity<>(commentDto,HttpStatus.FOUND);
+        return new ResponseEntity<>(commentDto,HttpStatus.OK);
     }
 
     @GetMapping("/post/{postId}")
     public ResponseEntity<List<CommentDto>> getCommentOnPost(@PathVariable Integer postId){
         List<CommentDto> commentsOnPost = commentService.getCommentsOnPost(postId);
-        return new ResponseEntity<>(commentsOnPost, HttpStatus.FOUND);
+        return new ResponseEntity<>(commentsOnPost, HttpStatus.OK);
     }
 }

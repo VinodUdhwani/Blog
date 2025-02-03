@@ -1,5 +1,4 @@
 package com.blog.Blog.entity;
-
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,7 +11,7 @@ public class Post {
     private Integer postId;
     @Column(name = "post_title",length = 50,nullable = false)
     private String postTitle;
-    @Column(length = 1000)
+    @Column(length = 100000)
     private String content;
     @Column(name = "image")
     private String imageName;
@@ -26,7 +25,7 @@ public class Post {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Comment> comment;
 
     public Post(Integer postId, String postTitle, String content, String imageName, Date addedDate, Category category, User user,List<Comment> comment) {

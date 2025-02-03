@@ -1,12 +1,11 @@
 package com.blog.Blog.payLoads;
 
 import com.blog.Blog.entity.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.Length;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,10 +66,12 @@ public class UserDto {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password =password;
     }

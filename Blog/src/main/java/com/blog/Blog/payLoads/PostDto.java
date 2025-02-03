@@ -1,6 +1,5 @@
 package com.blog.Blog.payLoads;
 
-import com.blog.Blog.entity.Comment;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.NoArgsConstructor;
 
@@ -10,11 +9,12 @@ import java.util.List;
 @NoArgsConstructor
 public class PostDto {
 
+    private Integer postId;
     @NotEmpty(message = "title is required")
     private String postTitle;
     @NotEmpty
     private String content;
-    @NotEmpty
+//    @NotEmpty
     private String imageName;
     private Date addedDate;
     private CategoryDto categoryDto;
@@ -28,30 +28,6 @@ public class PostDto {
         this.postTitle = postTitle;
         this.userDto = userDto;
         this.commentDto= commentDto;
-    }
-
-    public String getPostTitle() {
-        return postTitle;
-    }
-
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getImageName() {
-        return imageName;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
     }
 
     public Date getAddedDate() {
@@ -70,6 +46,38 @@ public class PostDto {
         this.categoryDto = categoryDto;
     }
 
+    public List<CommentDto> getCommentDto() {
+        return commentDto;
+    }
+
+    public void setCommentDto(List<CommentDto> commentDto) {
+        this.commentDto = commentDto;
+    }
+
+    public @NotEmpty String getContent() {
+        return content;
+    }
+
+    public void setContent(@NotEmpty String content) {
+        this.content = content;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public @NotEmpty(message = "title is required") String getPostTitle() {
+        return postTitle;
+    }
+
+    public void setPostTitle(@NotEmpty(message = "title is required") String postTitle) {
+        this.postTitle = postTitle;
+    }
+
     public UserDto getUserDto() {
         return userDto;
     }
@@ -78,11 +86,11 @@ public class PostDto {
         this.userDto = userDto;
     }
 
-    public List<CommentDto> getCommentDto() {
-        return commentDto;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setCommentDto(List<CommentDto> commentDto) {
-        this.commentDto = commentDto;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 }

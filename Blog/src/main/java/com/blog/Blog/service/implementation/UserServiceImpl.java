@@ -82,6 +82,12 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @Override
+    public UserDto getUserByEmail(String username) {
+        User user = this.userRepository.findByEmail(username).orElseThrow(() -> new ResourceNotFoundException("user", "email" + username, 0));
+        return modelMapper.map(user,UserDto.class);
+    }
+
     private User dtoToUser(UserDto userDto){
         User user=modelMapper.map(userDto, User.class);
 //        user.setId(userDto.getId());

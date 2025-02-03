@@ -56,7 +56,7 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable Integer postId){
-        return new ResponseEntity<>(postService.getPostById(postId),HttpStatus.FOUND);
+        return new ResponseEntity<>(postService.getPostById(postId),HttpStatus.OK);
     }
 
     @GetMapping("/")

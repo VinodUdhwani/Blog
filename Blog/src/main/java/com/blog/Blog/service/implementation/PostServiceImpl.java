@@ -42,7 +42,7 @@ public class PostServiceImpl implements PostService {
         User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("user","userId",userId));
 
         Category category=categoryRepository.findById(categoryId).orElseThrow(()->new ResourceNotFoundException("category","categoryId",categoryId));
-
+        
         Post post=modelMapper.map(postDto,Post.class);
         post.setPostTitle(postDto.getPostTitle());
         post.setContent(postDto.getContent());

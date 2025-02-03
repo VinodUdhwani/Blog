@@ -1,5 +1,4 @@
 package com.blog.Blog.exceptions;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;

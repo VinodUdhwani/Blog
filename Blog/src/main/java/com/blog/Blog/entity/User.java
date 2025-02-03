@@ -26,10 +26,10 @@ public class User implements UserDetails {
     @Column(length = 200)
     private String about;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Post> posts=new ArrayList<>();
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Comment> comment;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
