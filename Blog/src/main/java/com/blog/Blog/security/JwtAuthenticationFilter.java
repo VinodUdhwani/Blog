@@ -1,7 +1,6 @@
 package com.blog.Blog.security;
 
 import com.blog.Blog.service.implementation.CustomUserDetailsService;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;

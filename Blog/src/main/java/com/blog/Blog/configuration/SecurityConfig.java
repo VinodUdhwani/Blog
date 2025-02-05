@@ -3,7 +3,6 @@ package com.blog.Blog.configuration;
 import com.blog.Blog.security.JwtAuthenticationEntryPoint;
 import com.blog.Blog.security.JwtAuthenticationFilter;
 import com.blog.Blog.service.implementation.CustomUserDetailsService;
-import jakarta.servlet.FilterRegistration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,5 @@
 package com.blog.Blog.entity;
 
-
 import jakarta.persistence.*;
 
 import java.util.HashSet;

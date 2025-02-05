@@ -1,6 +1,5 @@
 package com.blog.Blog.payLoads;
 
-
 public class RoleDto {
     private String id;
     private String name;

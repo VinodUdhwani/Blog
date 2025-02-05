@@ -62,7 +62,7 @@ public class PostController {
     @GetMapping("/")
     public PostResponse getALlPost(@RequestParam(value = "pageNumber",defaultValue = AppConstants.PAGE_NUMBER,required = false) Integer pageNumber,
                                    @RequestParam(value = "pageSize",required = false,defaultValue = AppConstants.PAGE_SIZE) Integer pageSize,
-                                   @RequestParam(value = "sortBy",required = false,defaultValue = AppConstants.SORT_BY)String sortBy,
+                                   @RequestParam(value = "sortBy",required = false,defaultValue = AppConstants.SORT_BY_DATE)String sortBy,
                                    @RequestParam(value = "sortDirection",required = false,defaultValue =AppConstants.SORT_DIRECTION)String sortDirection){
         return postService.getALlPost(pageNumber,pageSize,sortBy,sortDirection);
     }
