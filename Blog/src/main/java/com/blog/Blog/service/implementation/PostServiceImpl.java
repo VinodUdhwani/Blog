@@ -7,6 +7,7 @@ import com.blog.Blog.exceptions.ResourceNotFoundException;
 import com.blog.Blog.payLoads.PostDto;
 import com.blog.Blog.payLoads.PostResponse;
 import com.blog.Blog.repositories.CategoryRepository;
+import com.blog.Blog.repositories.CommentRepository;
 import com.blog.Blog.repositories.PostRepository;
 import com.blog.Blog.repositories.UserRepository;
 import com.blog.Blog.service.PostService;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +38,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Override
     public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
@@ -70,8 +75,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePost(Integer postId) {
-        Post post=postRepository.findById(postId).orElseThrow(()->new ResourceNotFoundException("Post","postId",postId));
-        postRepository.delete(post);
+        Optional<Post> postOptional = this.postRepository.findById(postId);
+        if(postOptional.isPresent()) {
+            Post post=postOptional.get();
+            this.commentRepository.deleteAllCommentsByPost(post);
+            this.postRepository.deleteByIdCustom(postId);
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ public class Comment {
     @ManyToOne
     private User user;
     @ManyToOne
+    @JoinColumn(name = "post_post_id", nullable = false)
     private Post post;
 
     public Comment(int commentId, String comment, User user, Post post) {
